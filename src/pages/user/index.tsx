@@ -16,7 +16,7 @@ export default class Index extends Component<PropsWithChildren> {
 
   render() {
     return (
-      <View className="index">
+      <View className='index'>
         <AtButton type='primary'>按钮文案</AtButton>
       </View>
     );
