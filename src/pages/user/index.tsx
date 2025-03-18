@@ -3,6 +3,7 @@ import { View } from "@tarojs/components";
 
 import "taro-ui/dist/style/components/button.scss"; // 按需引入
 import "./index.scss";
+// eslint-disable-next-line import/first
 import {AtButton} from "taro-ui";
 
 export default class Index extends Component<PropsWithChildren> {
