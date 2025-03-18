@@ -16,7 +16,7 @@ export default class Index extends Component<PropsWithChildren> {
 
   render() {
     return (
-      <View className="index">
+      <View className='index'>
         <AtBadge value={10} maxValue={99}>
           <AtButton size='small'>按钮</AtButton>
         </AtBadge>
@@ -26,17 +26,17 @@ export default class Index extends Component<PropsWithChildren> {
         <AtBadge value='NEW'>
           <AtButton size='small'>按钮</AtButton>
         </AtBadge>
-        <AtBadge value={'···'}>
+        <AtBadge value='···'>
           <AtButton size='small'>按钮</AtButton>
         </AtBadge>
         <Text>Hello world!</Text>
-        <AtButton type="primary">I need Taro UI</AtButton>
+        <AtButton type='primary'>I need Taro UI</AtButton>
         <Text>Taro UI 支持 Vue 了吗？</Text>
-        <AtButton type="primary" circle={true}>
+        <AtButton type='primary' circle>
           支持
         </AtButton>
         <Text>共建？</Text>
-        <AtButton type="secondary" circle={true}>
+        <AtButton type='secondary' circle>
           来
         </AtButton>
       </View>
