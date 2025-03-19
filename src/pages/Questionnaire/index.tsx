@@ -9,29 +9,62 @@ import {useState} from "react";
  * 题目页面
  */
 export default () => {
+
   const question = questions[0];
-  const questionsOption = question.options.map(q => {
+
+
+  //当前题目的序号
+  const [currentId, setCurent] = useState<number>(1);
+  //当前题目
+  const [currentQuestion, setQuestion] = useState(questions[0]);
+  //当前题目的选项
+  const questionsOption = currentQuestion.options.map(q => {
     return {label: `${q.key}.${q.value}`, value: q.key};
   });
-  const [current, setCurent] = useState<number>(1);
 
   return (
     <View className='QuestionnairePage'>
-      <View className='at-article__h1 title'>{current}.{question.title}</View>
+
+      <View className='at-article__h1 title'>{currentId}.{currentQuestion.title}</View>
+
       <View className='options'>
         <AtRadio
           options={questionsOption}
         />
       </View>
-      <AtButton type='primary' className='controlButton' circle>
-        上一题
-      </AtButton>
-      <AtButton type='primary' className='controlButton' circle>
-        查看结果
-      </AtButton>
-      <AtButton type='primary' className='controlButton' circle>
-        下一题
-      </AtButton>
+
+      {currentId > 1 &&
+        <AtButton className='controlButton' circle onClick={
+          () => {
+            setCurent(currentId - 1);
+            setQuestion(questions[currentId - 1]);
+          }
+        }>
+          上一题
+        </AtButton>
+      }
+
+      {currentId < questions.length - 1 &&
+        <AtButton type='primary' className='controlButton' circle onClick={
+          () => {
+            setCurent(currentId + 1);
+            setQuestion(questions[currentId + 1]);
+          }
+        }>
+          下一题
+        </AtButton>
+      }
+
+      {currentId == questions.length &&
+        <AtButton type='primary' className='controlButton' circle onClick={
+          () => {
+            //todo 跳转到结果页面
+          }
+        }>
+          查看结果
+        </AtButton>
+      }
+
       <GlobalFooter/>
     </View>
 
