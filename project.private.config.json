@@ -3,5 +3,6 @@
   "projectname": "mbti-test-mini",
   "setting": {
     "compileHotReLoad": true
-  }
+  },
+  "libVersion": "3.7.11"
 }

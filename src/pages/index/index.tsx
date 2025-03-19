@@ -1,45 +1,25 @@
-import  { Component, PropsWithChildren } from "react";
-import { View, Text } from "@tarojs/components";
-import {AtBadge, AtButton} from "taro-ui";
-
-import "taro-ui/dist/style/components/button.scss"; // 按需引入
+import {View} from "@tarojs/components";
+import { AtButton} from "taro-ui";
 import "./index.scss";
+// eslint-disable-next-line import/first
+import Taro from '@tarojs/taro';
 
-export default class Index extends Component<PropsWithChildren> {
-  componentDidMount() {}
-
-  componentWillUnmount() {}
-
-  componentDidShow() {}
-
-  componentDidHide() {}
-
-  render() {
-    return (
-      <View className='index'>
-        <AtBadge value={10} maxValue={99}>
-          <AtButton size='small'>按钮</AtButton>
-        </AtBadge>
-        <AtBadge dot>
-          <AtButton size='small'>按钮</AtButton>
-        </AtBadge>
-        <AtBadge value='NEW'>
-          <AtButton size='small'>按钮</AtButton>
-        </AtBadge>
-        <AtBadge value='···'>
-          <AtButton size='small'>按钮</AtButton>
-        </AtBadge>
-        <Text>Hello world!</Text>
-        <AtButton type='primary'>I need Taro UI</AtButton>
-        <Text>Taro UI 支持 Vue 了吗？</Text>
-        <AtButton type='primary' circle>
-          支持
-        </AtButton>
-        <Text>共建？</Text>
-        <AtButton type='secondary' circle>
-          来
-        </AtButton>
+export default () => {
+  return (
+    <View className='indexPage'>
+      <View className='at-article__h1 title'>MBTI 性格测试</View>
+      <View className='at-article__h3 subTitle'>
+        可以准确地描述出你是谁，以及你的性格特点
       </View>
-    );
-  }
-}
+      <AtButton type='primary' size='normal' className="enterButton" circle onClick={() => {
+        // 跳转到测试页面
+        Taro.navigateTo({
+          url: '/pages/Questionnaire/index'
+        })
+      }}
+      >
+        开始测试
+      </AtButton>
+  </View>
+  );
+};
