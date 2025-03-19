@@ -10,9 +10,6 @@ import {useState} from "react";
  */
 export default () => {
 
-  const question = questions[0];
-
-
   //当前题目的序号
   const [currentId, setCurent] = useState<number>(1);
   //当前题目
