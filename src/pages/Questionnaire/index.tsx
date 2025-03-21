@@ -3,7 +3,8 @@ import "./index.scss";
 import GlobalFooter from '../../components/globalFooter';
 import {AtButton, AtRadio} from 'taro-ui'
 import questions from "../../data/questions.json";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import Taro from "@tarojs/taro";
 
 /**
  * 题目页面
@@ -18,6 +19,20 @@ export default () => {
   const questionsOption = currentQuestion.options.map(q => {
     return {label: `${q.key}.${q.value}`, value: q.key};
   });
+  //当前题目选择的答案提交
+  const [currentOption, setCurrentOption] = useState<string>();
+  //保存提交的答案，列表
+  const [answers] = useState<string[]>([]);
+
+
+  //序号变化的时候，改变当前题目和当前答案
+  useEffect(
+    () => {
+      setQuestion(questions[currentId - 1]);
+      setCurrentOption(answers[currentId - 1]);
+    }, [currentId]
+  )
+
 
   return (
     <View className='QuestionnairePage'>
@@ -27,10 +42,16 @@ export default () => {
       <View className='options'>
         <AtRadio
           options={questionsOption}
+          value={currentOption}
+          onClick={(value) => {
+            setCurrentOption(value);
+            answers[currentId - 1] = value;
+
+          }}
         />
       </View>
 
-      {currentId > 1 &&
+      {currentId > 1 && (
         <AtButton className='controlButton' circle onClick={
           () => {
             setCurent(currentId - 1);
@@ -38,30 +59,33 @@ export default () => {
           }
         }>
           上一题
-        </AtButton>
+        </AtButton>)
       }
 
-      {currentId < questions.length - 1 &&
+      {currentId < questions.length && (
         <AtButton type='primary' className='controlButton' circle onClick={
           () => {
             setCurent(currentId + 1);
-            setQuestion(questions[currentId + 1]);
+            setQuestion(questions[currentId - 1]);
           }
-        }>
+        } disabled={!currentOption}>
           下一题
-        </AtButton>
+        </AtButton>)
       }
 
-      {currentId == questions.length &&
+      {currentId == questions.length && (
         <AtButton type='primary' className='controlButton' circle onClick={
           () => {
             //todo 跳转到结果页面
+            Taro.navigateTo({
+              url: '/pages/result/index'
+
+            })
           }
         }>
           查看结果
-        </AtButton>
+        </AtButton>)
       }
-
       <GlobalFooter/>
     </View>
 
